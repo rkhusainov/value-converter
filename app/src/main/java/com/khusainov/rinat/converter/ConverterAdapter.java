@@ -12,11 +12,11 @@ import java.util.List;
 
 public class ConverterAdapter extends RecyclerView.Adapter<ConverterAdapter.ConverterHolder> {
 
-    private List<String> mItems;
+    private List<Unit.ValueTypes> mValueTypes;
     private IMainOnItemClickListener mOnItemClickListener;
 
-    public ConverterAdapter(List<String> items, IMainOnItemClickListener onItemClickListener) {
-        this.mItems = items;
+    public ConverterAdapter(List<Unit.ValueTypes> items, IMainOnItemClickListener onItemClickListener) {
+        this.mValueTypes = items;
         mOnItemClickListener = onItemClickListener;
     }
 
@@ -29,13 +29,13 @@ public class ConverterAdapter extends RecyclerView.Adapter<ConverterAdapter.Conv
 
     @Override
     public void onBindViewHolder(@NonNull ConverterHolder holder, int position) {
-        String item = mItems.get(position);
+        Unit.ValueTypes item = mValueTypes.get(position);
         holder.bind(item);
     }
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return mValueTypes.size();
     }
 
     class ConverterHolder extends RecyclerView.ViewHolder {
@@ -52,8 +52,8 @@ public class ConverterAdapter extends RecyclerView.Adapter<ConverterAdapter.Conv
             });
         }
 
-        void bind(String item) {
-            mValueName.setText(item);
+        void bind(Unit.ValueTypes item) {
+            mValueName.setText(item.toString());
         }
     }
 }
