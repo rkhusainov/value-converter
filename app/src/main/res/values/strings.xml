@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Converter</string>
+
+    <string-array name="items">
+        <item>Длина</item>
+        <item>Масса</item>
+        <item>Температура</item>
+        <item>Объем</item>
+    </string-array>
+</resources>
