@@ -44,7 +44,6 @@ public class ConverterAdapter extends RecyclerView.Adapter<ConverterAdapter.Conv
         public ConverterHolder(@NonNull View itemView, final IMainOnItemClickListener listener) {
             super(itemView);
             mValueName = itemView.findViewById(R.id.text_view_value_name);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
