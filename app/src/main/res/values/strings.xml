@@ -3,17 +3,4 @@
     <string name="from">Из</string>
     <string name="to">В</string>
 
-    <string-array name="items">
-        <item>Длина</item>
-        <item>Масса</item>
-        <item>Температура</item>
-        <item>Объем</item>
-        <item>Давление</item>
-        <item>Напряжение</item>
-        <item>Сила тока</item>
-        <item>Сопротивление</item>
-        <item>Плотность</item>
-        <item>Готовка</item>
-        <item>Размер одежды</item>
-    </string-array>
 </resources>

@@ -12,9 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ConverterActivity extends AppCompatActivity implements IMainOnItemClickListener {
-    public static final String TAG = ConverterActivity.class.getSimpleName();
 
-    private RecyclerView mRecyclerView;
+    private RecyclerView mConverterRecyclerView;
     private List<Unit.ValueTypes> mValueTypes = Arrays.asList(Unit.ValueTypes.values());
 
     @Override
@@ -22,16 +21,16 @@ public class ConverterActivity extends AppCompatActivity implements IMainOnItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_converter);
 
-        mRecyclerView = findViewById(R.id.recycler);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mConverterRecyclerView = findViewById(R.id.recycler);
+        mConverterRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        mRecyclerView.addItemDecoration(dividerItemDecoration);
-        mRecyclerView.setAdapter(new ConverterAdapter(mValueTypes, this));
+        mConverterRecyclerView.addItemDecoration(dividerItemDecoration);
+        mConverterRecyclerView.setAdapter(new ConverterAdapter(mValueTypes, this));
     }
 
     @Override
-    public void onClick() {
-        Intent intent = DetailActivity.newIntent(this);
+    public void onClick(Unit.ValueTypes currentType) {
+        Intent intent = DetailActivity.newIntent(this, currentType);
         startActivity(intent);
     }
 }

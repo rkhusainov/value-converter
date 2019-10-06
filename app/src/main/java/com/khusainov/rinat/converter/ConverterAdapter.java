@@ -15,8 +15,8 @@ public class ConverterAdapter extends RecyclerView.Adapter<ConverterAdapter.Conv
     private List<Unit.ValueTypes> mValueTypes;
     private IMainOnItemClickListener mOnItemClickListener;
 
-    public ConverterAdapter(List<Unit.ValueTypes> items, IMainOnItemClickListener onItemClickListener) {
-        this.mValueTypes = items;
+    public ConverterAdapter(List<Unit.ValueTypes> valueTypes, IMainOnItemClickListener onItemClickListener) {
+        this.mValueTypes = valueTypes;
         mOnItemClickListener = onItemClickListener;
     }
 
@@ -29,8 +29,8 @@ public class ConverterAdapter extends RecyclerView.Adapter<ConverterAdapter.Conv
 
     @Override
     public void onBindViewHolder(@NonNull ConverterHolder holder, int position) {
-        Unit.ValueTypes item = mValueTypes.get(position);
-        holder.bind(item);
+        Unit.ValueTypes currentValueType = mValueTypes.get(position);
+        holder.bind(currentValueType);
     }
 
     @Override
@@ -40,20 +40,22 @@ public class ConverterAdapter extends RecyclerView.Adapter<ConverterAdapter.Conv
 
     class ConverterHolder extends RecyclerView.ViewHolder {
         private TextView mValueName;
+        private Unit.ValueTypes currentValueType;
 
-        public ConverterHolder(@NonNull View itemView, final IMainOnItemClickListener listener) {
+        public ConverterHolder(@NonNull final View itemView, final IMainOnItemClickListener listener) {
             super(itemView);
             mValueName = itemView.findViewById(R.id.text_view_value_name);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onClick();
+                    listener.onClick(currentValueType);
                 }
             });
         }
 
-        void bind(Unit.ValueTypes item) {
-            mValueName.setText(item.toString());
+        void bind(Unit.ValueTypes currentValueType) {
+            mValueName.setText(currentValueType.name());
+            this.currentValueType = currentValueType;
         }
     }
 }

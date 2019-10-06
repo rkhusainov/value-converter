@@ -3,65 +3,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edit_text_from"
+        <LinearLayout
+            android:id="@+id/from_group"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            tools:text="10" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edit_text_to"
+            <TextView
+                android:id="@+id/text_view_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Километр" />
+
+            <EditText
+                android:id="@+id/edit_text_from"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                tools:text="10" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/to_group"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            tools:text="10"
-            android:enabled="false"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_view_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Километр" />
+
+            <EditText
+                android:id="@+id/edit_text_to"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:inputType="numberDecimal"
+                tools:text="10" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/from_to_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
             android:text="@string/from"
-            android:layout_weight="1"/>
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/to"
-            android:layout_weight="1"/>
+            android:textSize="20sp" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="8dp"
+        android:id="@+id/spinners"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Spinner
             android:id="@+id/spinner_from"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <Spinner
             android:id="@+id/spinner_to"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
     </LinearLayout>
 
