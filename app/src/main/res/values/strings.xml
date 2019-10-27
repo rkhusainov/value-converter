@@ -1,6 +1,34 @@
 <resources>
-    <string name="app_name">Converter</string>
+    <string name="app_name">Конвертер</string>
     <string name="from">Из</string>
     <string name="to">В</string>
+
+    <!--Types-->
+    <string name="length">Длина</string>
+    <string name="mass">Масса</string>
+    <string name="temperature">Температура</string>
+    <string name="volume">Объем</string>
+    <string name="area">Площадь</string>
+    <string name="pressure">Давление</string>
+    <string name="voltage">Напряжение</string>
+    <string name="amperage">Ток</string>
+    <string name="resistance">Сопротивление</string>
+    <string name="density">Плотность</string>
+    <string name="time">Время</string>
+    <string name="speed">Скорость</string>
+    <string name="cooking">Готовка</string>
+
+    <!--Length-->
+    <string name="meter">Метр</string>
+    <string name="kilometer">Километр</string>
+    <string name="millimeter">Миллиметр</string>
+    <string name="centimeter">Сантиметр</string>
+    <string name="decimeter">Дицеметр</string>
+
+    <!--Mass-->
+    <string name="gram"> Грамм</string>
+    <string name="milligram">Миллиграмм</string>
+    <string name="kilogram">Килограмм</string>
+    <string name="ton"> Тонна</string>
 
 </resources>

@@ -8,13 +8,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class ConverterActivity extends AppCompatActivity implements IMainOnItemClickListener {
 
     private RecyclerView mConverterRecyclerView;
-    private List<Unit.ValueTypes> mValueTypes = Arrays.asList(Unit.ValueTypes.values());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +21,7 @@ public class ConverterActivity extends AppCompatActivity implements IMainOnItemC
         mConverterRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         mConverterRecyclerView.addItemDecoration(dividerItemDecoration);
-        mConverterRecyclerView.setAdapter(new ConverterAdapter(mValueTypes, this));
+        mConverterRecyclerView.setAdapter(new ConverterAdapter(this));
     }
 
     @Override

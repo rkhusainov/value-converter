@@ -8,15 +8,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ConverterAdapter extends RecyclerView.Adapter<ConverterAdapter.ConverterHolder> {
 
-    private List<Unit.ValueTypes> mValueTypes;
+    private List<Unit.ValueTypes> mValueTypes= Arrays.asList(Unit.ValueTypes.values());
     private IMainOnItemClickListener mOnItemClickListener;
 
-    public ConverterAdapter(List<Unit.ValueTypes> valueTypes, IMainOnItemClickListener onItemClickListener) {
-        this.mValueTypes = valueTypes;
+    public ConverterAdapter(IMainOnItemClickListener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
     }
 
@@ -54,7 +54,7 @@ public class ConverterAdapter extends RecyclerView.Adapter<ConverterAdapter.Conv
         }
 
         void bind(Unit.ValueTypes currentValueType) {
-            mValueName.setText(currentValueType.name());
+            mValueName.setText(currentValueType.mNameRes);
             this.currentValueType = currentValueType;
         }
     }

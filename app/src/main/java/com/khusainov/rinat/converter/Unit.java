@@ -1,50 +1,59 @@
 package com.khusainov.rinat.converter;
 
+import androidx.annotation.StringRes;
+
 public class Unit {
 
     enum ValueTypes {
-        Длина,
-        Масса,
-        Температура,
-        Объем,
-        Площадь,
-        Давление,
-        Напряжение,
-        Ток,
-        Сопротивление,
-        Плотность,
-        Время,
-        Скорость,
-        Готовка;
+        LENGTH(R.string.length),
+        MASS(R.string.mass),
+        TEMPERATURE(R.string.temperature),
+        VOLUME(R.string.volume),
+        AREA(R.string.area),
+        PRESSURE(R.string.pressure),
+        VOLTAGE(R.string.voltage),
+        AMPERAGE(R.string.amperage),
+        RESISTANCE(R.string.resistance),
+        DENSITY(R.string.density),
+        TIME(R.string.time),
+        SPEED(R.string.speed),
+        COOKING(R.string.cooking);
 
-        ValueTypes() {
+        int mNameRes;
+
+        ValueTypes(@StringRes int nameRes) {
+            mNameRes = nameRes;
         }
     }
 
     enum Length {
-        Метр(1.0),
-        Километр(0.001),
-        Миллиметр(1000),
-        Сантиметр(100),
-        Дицеметр(10);
+        METER(R.string.meter, 1.0),
+        KILOMETER(R.string.kilometer, 0.001),
+        MILLIMETER(R.string.millimeter, 1000),
+        CENTIMETER(R.string.centimeter, 100),
+        DECIMETER(R.string.decimeter, 10);
 
+        int mNameRes;
         double value;
 
-        Length(double value) {
+        Length(@StringRes int nameRes, double value) {
             this.value = value;
+            mNameRes = nameRes;
         }
     }
 
     enum Mass {
-        Грамм(1.0),
-        Миллиграмм(1000),
-        Килограмм(0.001),
-        Тонна(0.000001);
+        GRAM(R.string.gram, 1.0),
+        MILLIGRAM(R.string.milligram, 1000),
+        KILOGRAM(R.string.kilogram, 0.001),
+        TON(R.string.ton, 0.000001);
 
+        int mNameRes;
         double value;
 
-        Mass(double value) {
+        Mass(@StringRes int nameRes, double value) {
             this.value = value;
+            mNameRes = nameRes;
         }
     }
 }

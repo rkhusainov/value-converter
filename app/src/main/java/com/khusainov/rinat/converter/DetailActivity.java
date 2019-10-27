@@ -15,8 +15,11 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class DetailActivity extends AppCompatActivity {
-    public static final String TAG = DetailActivity.class.getSimpleName();
     public static final String KEY = "KEY";
     public static final String DEFAULT_VALUE = "1";
 
@@ -29,6 +32,11 @@ public class DetailActivity extends AppCompatActivity {
 
     private Unit.ValueTypes mValueType;
     private ArrayAdapter<?> mSpinnerAdapterFrom;
+
+    private List<Unit.Length> mLengths;
+    private List<Unit.Mass> mMasses;
+    private List<String> mRuLengths = new ArrayList<>();
+    private List<String> mRuMasses = new ArrayList<>();
 
     private int mSpinnerFromPosition = 0;
     private int mSpinnerToPosition = 0;
@@ -44,14 +52,29 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        mTextViewFrom=findViewById(R.id.text_view_from);
-        mTextViewTo=findViewById(R.id.text_view_to);
+        mTextViewFrom = findViewById(R.id.text_view_from);
+        mTextViewTo = findViewById(R.id.text_view_to);
 
         mValueType = (Unit.ValueTypes) getIntent().getSerializableExtra(KEY);
-        this.setTitle(mValueType.toString());
+        if (mValueType != null) {
+            this.setTitle(mValueType.mNameRes);
+        }
 
+        initRuUnits();
         initEditText();
         initSpinner();
+    }
+
+    private void initRuUnits() {
+        mLengths = Arrays.asList(Unit.Length.values());
+        for (Unit.Length length : mLengths) {
+            mRuLengths.add(getResources().getString(length.mNameRes));
+        }
+
+        mMasses = Arrays.asList(Unit.Mass.values());
+        for (Unit.Mass masses : mMasses) {
+            mRuMasses.add(getResources().getString(masses.mNameRes));
+        }
     }
 
     private void initEditText() {
@@ -83,11 +106,11 @@ public class DetailActivity extends AppCompatActivity {
         mSpinnerTo = findViewById(R.id.spinner_to);
 
         switch (mValueType) {
-            case Длина:
-                mSpinnerAdapterFrom = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Unit.Length.values());
+            case LENGTH:
+                mSpinnerAdapterFrom = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mRuLengths);
                 break;
-            case Масса:
-                mSpinnerAdapterFrom = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Unit.Mass.values());
+            case MASS:
+                mSpinnerAdapterFrom = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mRuMasses);
                 break;
             default:
                 break;
@@ -133,15 +156,15 @@ public class DetailActivity extends AppCompatActivity {
     public String calculation(String value, int positionFrom, int positionTo) {
         double result = 0;
         switch (mValueType) {
-            case Длина:
+            case LENGTH:
                 result = Double.parseDouble(value) / Unit.Length.values()[positionFrom].value * Unit.Length.values()[positionTo].value;
-                mTextViewFrom.setText(Unit.Length.values()[positionFrom].name());
-                mTextViewTo.setText(Unit.Length.values()[positionTo].name());
+                mTextViewFrom.setText(mRuLengths.get(positionFrom));
+                mTextViewTo.setText(mRuLengths.get(positionTo));
                 break;
-            case Масса:
+            case MASS:
                 result = Double.parseDouble(value) / Unit.Mass.values()[positionFrom].value * Unit.Mass.values()[positionTo].value;
-                mTextViewFrom.setText(Unit.Mass.values()[positionFrom].name());
-                mTextViewTo.setText(Unit.Mass.values()[positionTo].name());
+                mTextViewFrom.setText(mRuMasses.get(positionFrom));
+                mTextViewTo.setText(mRuMasses.get(positionTo));
                 break;
             default:
                 break;
