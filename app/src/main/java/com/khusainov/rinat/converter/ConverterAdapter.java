@@ -13,10 +13,10 @@ import java.util.List;
 
 public class ConverterAdapter extends RecyclerView.Adapter<ConverterAdapter.ConverterHolder> {
 
-    private List<Unit.ValueTypes> mValueTypes= Arrays.asList(Unit.ValueTypes.values());
-    private IMainOnItemClickListener mOnItemClickListener;
+    private List<Unit.ValueTypes> mValueTypes = Arrays.asList(Unit.ValueTypes.values());
+    private IConverterOnItemClickListener mOnItemClickListener;
 
-    public ConverterAdapter(IMainOnItemClickListener onItemClickListener) {
+    public ConverterAdapter(IConverterOnItemClickListener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
     }
 
@@ -42,7 +42,7 @@ public class ConverterAdapter extends RecyclerView.Adapter<ConverterAdapter.Conv
         private TextView mValueName;
         private Unit.ValueTypes currentValueType;
 
-        public ConverterHolder(@NonNull final View itemView, final IMainOnItemClickListener listener) {
+        public ConverterHolder(@NonNull final View itemView, final IConverterOnItemClickListener listener) {
             super(itemView);
             mValueName = itemView.findViewById(R.id.text_view_value_name);
             itemView.setOnClickListener(new View.OnClickListener() {

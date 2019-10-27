@@ -1,5 +1,5 @@
 package com.khusainov.rinat.converter;
 
-public interface IMainOnItemClickListener {
+public interface IConverterOnItemClickListener {
     void onClick(Unit.ValueTypes valueTypes);
 }

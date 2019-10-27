@@ -1,25 +1,27 @@
 package com.khusainov.rinat.converter;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailFragment extends Fragment {
+
     public static final String KEY = "KEY";
     public static final String DEFAULT_VALUE = "1";
 
@@ -41,28 +43,38 @@ public class DetailActivity extends AppCompatActivity {
     private int mSpinnerFromPosition = 0;
     private int mSpinnerToPosition = 0;
 
-    public static Intent newIntent(Context context, Unit.ValueTypes currentType) {
-        Intent intent = new Intent(context, DetailActivity.class);
-        intent.putExtra(KEY, currentType);
-        return intent;
+
+    public static DetailFragment newInstance(Unit.ValueTypes valueTypes) {
+        Bundle args = new Bundle();
+        args.putSerializable(KEY, valueTypes);
+        DetailFragment fragment = new DetailFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_detail, container, false);
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mTextViewFrom = view.findViewById(R.id.text_view_from);
+        mTextViewTo = view.findViewById(R.id.text_view_to);
 
-        mTextViewFrom = findViewById(R.id.text_view_from);
-        mTextViewTo = findViewById(R.id.text_view_to);
+        if (getArguments() != null) {
+            mValueType = (Unit.ValueTypes) getArguments().getSerializable(KEY);
+        }
 
-        mValueType = (Unit.ValueTypes) getIntent().getSerializableExtra(KEY);
         if (mValueType != null) {
-            this.setTitle(mValueType.mNameRes);
+            getActivity().setTitle(mValueType.mNameRes);
         }
 
         initRuUnits();
-        initEditText();
-        initSpinner();
+        initEditText(view);
+        initSpinner(view);
     }
 
     private void initRuUnits() {
@@ -77,9 +89,9 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    private void initEditText() {
-        mEditTextFrom = findViewById(R.id.edit_text_from);
-        mEditTextTo = findViewById(R.id.edit_text_to);
+    private void initEditText(View view) {
+        mEditTextFrom = view.findViewById(R.id.edit_text_from);
+        mEditTextTo = view.findViewById(R.id.edit_text_to);
         mEditTextFrom.setText(DEFAULT_VALUE);
 
         mEditTextFrom.addTextChangedListener(new TextWatcher() {
@@ -101,16 +113,16 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
-    private void initSpinner() {
-        mSpinnerFrom = findViewById(R.id.spinner_from);
-        mSpinnerTo = findViewById(R.id.spinner_to);
+    private void initSpinner(View view) {
+        mSpinnerFrom = view.findViewById(R.id.spinner_from);
+        mSpinnerTo = view.findViewById(R.id.spinner_to);
 
         switch (mValueType) {
             case LENGTH:
-                mSpinnerAdapterFrom = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mRuLengths);
+                mSpinnerAdapterFrom = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, mRuLengths);
                 break;
             case MASS:
-                mSpinnerAdapterFrom = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mRuMasses);
+                mSpinnerAdapterFrom = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, mRuMasses);
                 break;
             default:
                 break;
